@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+ # Ghost containers
+ blog:
+  image: ghost:latest
+  container_name: "blog"
+  restart: always
+  environment:
+   - VIRTUAL_HOST=ashu.io.develop,www.ashu.io.develop
+   - url=http://ashu.io.develop
+   - NODE_ENV=development
+  env_file: env/ashu.dev.env
+  volumes:
+   - "data-ghost:/var/lib/ghost/content"
+   - "./config.base.json:/var/lib/ghost/config.development.json:ro"
+   - "./config.base.json:/var/lib/ghost/config.production.json:ro"
+
+ # Database containers
+ mysql:
+  image: mariadb:10.3
+  container_name: "db"
+  restart: always
+  env_file: env/ashu.dev.env
+  expose:
+   - "3306"
+  volumes:
+   - "data-db:/var/lib/mysql"
+
+# Reverse Proxy
+ nginx-proxy:
+  image: jwilder/nginx-proxy:0.7.0
+  container_name: "nginx-proxy"
+  restart: always
+  ports:
+   - "80:80"
+  volumes:
+   - /var/run/docker.sock:/tmp/docker.sock:ro
+
+# Data volumes containing all the persistent storage for the blog
+volumes:
+ data-ghost:
+  name: data-ghost
+ data-db:
+  name: data-db
