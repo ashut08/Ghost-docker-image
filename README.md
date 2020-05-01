@@ -8,7 +8,7 @@ Make sure you have install <b>docker</b> and <b>docker-compose</b>
 Open a terminal and go to  folder in which docker-compose.yml file saved and run
         <b>docker-compose up</b>
 ## About 
-This is simpe project built with docker to set up Ghost building envoirement on any system
+This is simpe project built with docker to set up Ghost building envoirement on any system.
 
 ## Some screenshot of my Project
 ![Screenshot from 2020-04-27 17-06-09](https://user-images.githubusercontent.com/49301530/80782080-54a7f180-8b92-11ea-8730-00c45f584484.png)
